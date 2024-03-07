@@ -18,3 +18,4 @@ insects<-c(10,16,25,42,61,73)
 
 > plot(flowers, insects, pch=19, col='blue', cex=.98, xlab='fiori', ylab='insetti')
 
+# I edited this script to see how it works
