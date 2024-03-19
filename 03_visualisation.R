@@ -76,6 +76,47 @@ dev.off() #deletes the previous device
 plot(stacksent[[4]], col=clch) # I'm using two square parenthesis because stacksent is 2-dimensional object, if it were an array I would have used one set of parenthesis
 
 
+# RGB plotting
+# stacksent[[1]] = b2 = blue
+# stacksent[[2]] = b3 = green
+# stacksent[[3]] = b4 = red
+# stacksent[[4]] = b8 = NIR       
+
+d1<-im.plotRGB(stacksent, r=3, g=2, b=1)
+# im.plotRGB(stacksent, 3, 2, 1)   it's the same as above
+
+# NIR makes vegetaion easier to visualise so I replace other colours with it
+
+d2<-im.plotRGB(stacksent, 4, 2, 1)  
+
+# Exercise: make a plot with the natural colour and the false colour images
+
+par(mfrow=c(1,2))
+im.plotRGB(stacksent, r=3, g=2, b=1)
+im.plotRGB(stacksent, 4, 2, 1)
+
+# for some reason this is what is done in the remote sensing world. If you wanna change a colour you have to shift all other colours as well
+par(mfrow=c(1,3))
+im.plotRGB(stacksent, r=3, g=2, b=1)
+im.plotRGB(stacksent, 4, 2, 1)
+im.plotRGB(stacksent, 4, 3, 2)
+
+# NIR on green
+im.plotRGB(stacksent, 3, 4, 2)
+
+# NIR on blue, this makes soil appear as yeallow
+im.plotRGB(stacksent, 3, 2, 4)
+
+# Exercise: put the 4 images all together
+par(mfrow=c(2,2))
+im.plotRGB(stacksent, r=3, g=2, b=1) # natural colour
+im.plotRGB(stacksent, 4, 2, 1)       # NIR on red
+im.plotRGB(stacksent, 3, 4, 2)       # NIR on green
+im.plotRGB(stacksent, 3, 2, 4)       # NIR on blue
+
+# correlate variables, it also calculates Pearson's Correlation Index and data frequency
+pairs(stacksent)
+
 
 
 
