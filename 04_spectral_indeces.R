@@ -51,3 +51,44 @@ im.plotRGB(mato06,2,1,3) # 06 NIR on green
 im.plotRGB(mato06,3,2,1) # 06 NIR on blue
 
 plot(mato06[[1]]) # plotting NIR
+
+
+# Calculating the DVI (Difference Vegetation Index)
+# DVI = NIR - RED --> simply subtract bands
+# bands: 1=NIR, 2=RED, 3=GREEN
+
+dvi92 = mato92[[1]] - mato92[[2]]  # subtracting RED to NIR
+# alternative way of coding:
+# dvi92 = mato92$matogrosso~2219_lrg_1 - mato92$matogrosso~2219_lrg_2
+
+# plotting the DVI
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100) # creating the colour palette
+plot(dvi92, col=cl) # plotting the difference
+dvi92 # this line prints the index's values
+
+# 2006
+mato06 <- im.import("matogrosso_ast_2006209_lrg.jpg") # importing the image
+# dvi 2006
+dvi06 = mato06[[1]] - mato06[[2]]  # subtracting bands 
+plot(dvi06, col=cl) # plotting the difference
+
+# Exercise: plot the dvi1992 beside the dvi2006
+par(mfrow=c(1,2))
+plot(dvi92, col=cl)
+plot(dvi06, col=cl)
+
+#another way creating a stack
+stackdvi <- c(dvi92, dvi06)
+pairs(stackdvi)
+
+# Normalized Difference Vegetation Index (NDVI)
+# this is used instead of the DVI when working with images that have a different number of bits. 
+# This way it is possible to make a comparison after ythe normalization
+ndvi92 = dvi92 / (mato92[[1]]+mato92[[2]]) # an extend version would be ndvi92=(mato92[[1]]-mato92[[2]])/(mato92[[1]]+mato92[[2]])
+ndvi06 = dvi06 / (mato06[[1]]+mato06[[2]]) # same as above but for 2006
+
+dev.off()
+# plotting the two images together
+par(mfrow=c(1,2))
+plot(ndvi92, col=cl)
+plot(ndvi06, col=cl)
