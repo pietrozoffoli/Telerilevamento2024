@@ -67,7 +67,7 @@ plot(dvi92, col=cl) # plotting the difference
 dvi92 # this line prints the index's values
 
 # 2006
-mato06 <- im.import("matogrosso_ast_2006209_lrg.jpg") # importing the image
+# mato06 <- im.import("matogrosso_ast_2006209_lrg.jpg") # importing the image
 # dvi 2006
 dvi06 = mato06[[1]] - mato06[[2]]  # subtracting bands 
 plot(dvi06, col=cl) # plotting the difference
@@ -76,10 +76,6 @@ plot(dvi06, col=cl) # plotting the difference
 par(mfrow=c(1,2))
 plot(dvi92, col=cl)
 plot(dvi06, col=cl)
-
-#another way creating a stack
-stackdvi <- c(dvi92, dvi06)
-pairs(stackdvi)
 
 # Normalized Difference Vegetation Index (NDVI)
 # this is used instead of the DVI when working with images that have a different number of bits. 
