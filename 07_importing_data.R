@@ -3,6 +3,8 @@
 library(imageRy)
 library(terra)
 
+# first download the image from the internet 
+
 setwd("C:/Users/HP/Desktop/Magistrale/Telerilevamento Geo-Ecologico") # setting the working directory i.e. I'm telling R where to take files I'm gonna use
 dir()  # verify what files are inside my current working directory    # use / and not \ even though Windows says the path is otherwies
 eclissi<-rast("eclissi.png") # loads data from outside
@@ -22,10 +24,9 @@ plot(dif)
 globnetrad<-rast("CERES_NETFLUX_M_2006-07.jpeg") # global net radiation from Earth Observatory by NASA
 plot(globnetrad)
 
-
 # importing data downloaded from copernicus
 
-soil<-rast("c_gls_SSM1km_202404210000_CEURO_S1CSAR_V1.2.1.nc")
+soil<-rast("c_gls_SSM1km_202404210000_CEURO_S1CSAR_V1.2.1.nc") # .nc files are net cdf, it's kind of a tiff
 plot(soil) # SSM: soil moisture ; SSM_NOISE: estimated error
 plot(soil[[1]])
 
@@ -35,5 +36,9 @@ ext<-c(25,30,55,58)  # defining the extension of the crop (x min max; y min max)
 soilcrop<-crop(soil,ext) # cropping the image using the extension defined above
 plot(soilcrop)
 plot(soilcrop[[1]])
+
+
+
+
 
 
