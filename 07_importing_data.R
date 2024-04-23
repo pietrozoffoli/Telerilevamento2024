@@ -23,3 +23,17 @@ globnetrad<-rast("CERES_NETFLUX_M_2006-07.jpeg") # global net radiation from Ear
 plot(globnetrad)
 
 
+# importing data downloaded from copernicus
+
+soil<-rast("c_gls_SSM1km_202404210000_CEURO_S1CSAR_V1.2.1.nc")
+plot(soil) # SSM: soil moisture ; SSM_NOISE: estimated error
+plot(soil[[1]])
+
+# cropping the image using coordinates 
+
+ext<-c(25,30,55,58)  # defining the extension of the crop (x min max; y min max)
+soilcrop<-crop(soil,ext) # cropping the image using the extension defined above
+plot(soilcrop)
+plot(soilcrop[[1]])
+
+
