@@ -1,6 +1,9 @@
 \documentclass[12pt]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{hyperref}
+\usepackage{natbib} % bibliography
+\usepackage{lineno} % line numbers
+\linenumbers        % applies line numbers
 \title{My first LaTex document}
 \author{Pietro Zoffoli}
 %\date{May 2024}
@@ -8,15 +11,23 @@
 \begin{document}
 
 \maketitle 
+
+\begin{abstract}
+   \noindent this is the abstract and how you make it, as you can see, it's as easy as you could imagine
+\end{abstract}
+\bigskip
+\textit{Keywords}: birds, eclipse, LaTex
+
 \tableofcontents 
 
 \section{Introduction}\label{sec:intro}
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
-\noindent "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+\textbf{"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.} Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+\bigskip % and \smallskip. Putting \\ at the end of the line works just like \bigskip
+\noindent \textit{"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.} Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 \section{Methods}
 \subsection{Study area}
+
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 \subsection{algorithms}
 the first equation used was equation \ref{eq:somma}:
@@ -33,11 +44,50 @@ the first equation used was equation \ref{eq:somma}:
 
 
 \section{Results}
+in this thesis the algorithm led to the result shown in figure\ref{fig:eclipse}
 \section{Discussion}
 Our results are in line with previous papers, introduced in section \ref{sec:intro}
 
+\subsection{Data availability}
+all the data used in this thesis are available at :\url{https://en.wikibooks.org/wiki/LaTeX/Mathematics} % just the first url I could find to test the function
 
+\newpage
 
+\begin{figure}
+    \centering % centering the image 
+    \includegraphics[width=\textwidth]{eclissi.png} 
+    \caption{a cool picture of the eclipse}
+    \label{fig:eclipse}
+\end{figure}
 
+In this thesis we dealt with whatever is cited below \cite{NClisby2005}. We are also very interested in bird albinism \cite{Bensch2000}.
+\citet{Bensch2000} said some interesting things in their paper % it's not working as supposed, must investigate further
+% \citep with parenthesis \citet for text
+
+This is how to make notes
+\footnote{Source: trust me I'm a doctor}
+
+\section{discussion}
+in this thesis we demonstrated that:
+\begin{itemize}
+    \item LaTex is super useful
+    \item birds can have albinism
+    \item bla bla bla
+\end{itemize}
+
+in this thesis we demonstrated that:
+
+\begin{enumerate}
+    \item LaTex is super useful
+    \item birds can have albinism
+    \item bla bla bla
+\end{enumerate}
+
+\begin{thebibliography}{999}
+\bibitem[Bensch et al.,2000]{Bensch2000}
+Bensch, S., Hansson, B., Hasselquist, D., \& Nielsen, B. (2000). Partial albinism in a semi‐isolated population of great reed warblers. Hereditas, 133(2), 167-170.
+\bibitem[Clisby,2005]{NClisby2005}
+Clisby, N., \& McCoy, B. M. (2006). Ninth and tenth order virial coefficients for hard spheres in D dimensions. Journal of Statistical Physics, 122(1), 15-57.
+\end{thebibliography}
 
 \end{document}
