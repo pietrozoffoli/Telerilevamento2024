@@ -1,0 +1,77 @@
+---
+title: "Vignette"
+author: "Pietro Zoffoli"
+date: "2024-05-16"
+output: html_document
+---
+
+# My first rmarkdown file
+
+This file contains functions for R scripting in Geo_Ecological Remote Sensing. 
+
+We are going to make use of the following packages:
+
+```{r}
+library(imageRy)
+library(terra)
+library(viridis)
+```
+
+In order to visualize the list of data use:
+
+```{r, eval=TRUE}
+im.list()
+```
+
+in order to imput data you can use the following funcyion:
+```{r, eval=TRUE}
+mato<-im.import("matogrosso_l5_1992219_lrg.jpg")
+```
+
+We are using the set from Mato Grosso and we plot it in RGB space, as:
+
+```{r, eval=TRUE}
+im.plotRGB(mato, 1, 2, 3)
+```
+
+This plot is related to the following bands: band 1 = NIR, band 2 = red, band 3 = green
+
+We can change the visualization by changing the order of bands in RGB space. 
+
+```{r, eval=TRUE}
+im.plotRGB(mato, 2, 1, 3)
+```
+
+In order to look at different band combination alltogether we can use :
+
+```{r, eval=TRUE}
+par(mfrow=c(1,3))
+im.plotRGB(mato, 1, 2, 3)
+im.plotRGB(mato, 2, 1, 3)
+im.plotRGB(mato, 3, 2, 1)
+```
+
+## Calculating spectral indeces:
+```{r, eval=TRUE}
+dvi<- mato[1]-mato[2]
+plot(dvi, col=viridis(100))
+```
+
+## Claculating spatial variability
+```{r, eval=TRUE}
+sd5<-focal(mato[[1]], matrix(1/25, 5, 5), fun=sd)
+plot(sd5, col=magma(100))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
