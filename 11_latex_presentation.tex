@@ -1,0 +1,107 @@
+\documentclass{beamer}
+\usepackage{graphicx} % Required for inserting images
+
+% Theme and Color variations:
+% https://mpetroff.net/files/beamer-theme-matrix/
+\usetheme{Frankfurt}
+\usecolortheme{crane}
+
+\title{Presentazione in LaTeX}
+\author{Duccio Rocchini}
+\date{May 2024}
+
+\begin{document}
+
+\maketitle
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{Introduction}
+
+\begin{frame}{My first slide}
+    Here I am inserting my text
+\end{frame}
+
+\begin{frame}{Itemize}
+The main aim of this presentation will be:
+    \begin{itemize}
+        \item My first theme
+        \item \pause my second theme
+        \item \pause blablabla
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Text dimension}
+    \scriptsize{Here I am inserting my text}
+\end{frame}
+
+\begin{frame}{Text dimension}
+    Here I am \textbf{inserting} my text \\
+    \bigskip
+    Here I am \textit{inserting} my text \\
+    \bigskip
+    Here I am inserting my text 
+\end{frame}
+
+\section{Formulas}
+
+\begin{frame}{Algorithms used}
+In this thesis, we made use of the following formula:
+\bigskip
+    \begin{equation}
+        \delta = \sqrt{\frac{\displaystyle\sum_{i=1}^{N}{(x - \mu)^2}}{N}}
+    \end{equation}
+\end{frame}
+
+\section{Results}
+
+\begin{frame}{Main results achieved}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.9\linewidth]{stats.png}
+        % \caption{Enter Caption}
+        \label{fig:enter-label}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Main results achieved}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.4\linewidth]{stats.png}
+        \includegraphics[width=.4\linewidth]{stats.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Four graphs}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.4\linewidth]{stats.png}
+        \includegraphics[width=.4\linewidth]{stats.png} \\
+        \includegraphics[width=.4\linewidth]{stats.png}
+        \includegraphics[width=.4\linewidth]{stats.png} \\
+    \end{figure}
+
+\bigskip
+\centering
+\scriptsize{Rocchini et al. (2024)}
+\end{frame}
+
+\begin{frame}{Columns}
+    \begin{columns}
+        \begin{column}{width=.5\textwidth}
+            A small amount of text  here or a larger one as we wish...
+        \end{column}
+        \begin{column}{width=.5\textwidth}
+            \includegraphics[width=.4\linewidth]{stats.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+\end{document}
