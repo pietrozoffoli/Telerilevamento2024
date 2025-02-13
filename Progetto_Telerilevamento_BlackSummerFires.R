@@ -210,7 +210,7 @@ rast_prenbr<-rast("prenbr.tiff")                 # importing the pre-fire NBR ra
 
 # Now I'm subtracting the post-fire NBR to the pre-fire NBR to get a map of the differential NBR
 dnbr0<-rast_prenbr-postnbr            # calculating the differential NBR
-plot(dnbr,main=("dNBR 09-05-2020"))  # plotting the dNBR map
+plot(dnbr0,main=("dNBR 09-05-2020"))  # plotting the dNBR map
 
 dev.off() # Enough already! My warranty is already expired and can't be extended
 
