@@ -4,7 +4,7 @@
 # Docente Duccio Rocchini
 #
 # Black Summer Fires - Blue Mountains National Park - New South Wales - Australia 
-# Analyzing the vegetation loss in the area of the Blue Mountains in Australia following the fires of 2019-2020 and the folowwing recovery.
+# Analyzing the vegetation loss in the area of the Blue Mountains in Australia following the fires of 2019-2020 and the following recovery.
 # I am suing the BAI (Burnt Area Index) and NBR (Normalized Burn Ratio) to quantify the amount of lost vegetation. 
 #Then I am monitoring the recovery of the area using the same methods.
 
