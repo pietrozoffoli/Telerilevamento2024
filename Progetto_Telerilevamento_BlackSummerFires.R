@@ -170,6 +170,8 @@ compnbr<-par(mfrow=c(2,1))
 im.plotRGB(stackpost,4,2,1)
 plot(postnbr)
 
+dev.off()
+
 # Now this is more like it, shadows no longer represent an issue for our investigation
 # Let's divide the plot in classes so that we can start quantifying
 # From the NBR plot I see that the burned pixels have a value approximately below 0.3
@@ -196,6 +198,7 @@ km2                         # printing the value
 perc_burnt<-(871571/2517500)*100 # calculating the percentage of burned surface
 perc_burnt                       # printing the value
 #[1] 34.6205
+dev.off()
 #--------------------------------------------------------------------------dNBR---------------------------------------------
 # Now to better comprehend the scope of the damage caused by the fire, I am going to calculate the differential Normalized Burn Ratio
 # Higher values represent damaged areas and lower values represent recovering vegetation
