@@ -364,6 +364,9 @@ may2023<-c(round(freq(fr5)[1,3]/(dim(fr5)[1]*dim(fr5)[2])*100,2),
 # Creating the data frame
 tab<-data.frame(legend,may2020,may2023)
 tab
+# legend may2020 may2023
+# 1 Healthy   65.38   96.84
+# 2  Burned   34.62    3.16
 # Creating a pie chart turned out to be quite a challenge and required some research to finally get it done.
 # Ultimately it's a bar plot, but the bars are put on top of each other, there's no x or y axis and the length of the bars is transformed to polar coordinates
 
