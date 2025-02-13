@@ -352,25 +352,24 @@ plot(nbr4,col=viridis(100),main=paste("18-06-2022 burned area:",perc4,"%"))
 plot(nbr5,col=viridis(100),main=paste("04-05-2023 burned area:",perc5,"%"))
 
 # Creating pie charts to better visualize the percentage of burned area
-
 # First I need to create a data frame with the percentage of healthy and burned soil for each time step
 # Create vector containing the "qualities" 
 legend<-c("Healthy","Burned")
 # Create vector containing the percentage of each quality for May 2020
 may2020<-c(round(freq(fr0)[1,3]/(dim(fr0)[1]*dim(fr0)[2])*100,2),
           round(freq(fr0)[2,3]/(dim(fr0)[1]*dim(fr0)[2])*100,2))
-# Create vector containing the percentage of each quality for June 2022
-june2022<-c(round(freq(fr4)[1,3]/(dim(fr4)[1]*dim(fr4)[2])*100,2),
-           round(freq(fr4)[2,3]/(dim(fr4)[1]*dim(fr4)[2])*100,2))
+# Create vector containing the percentage of each quality for May 2023
+may2023<-c(round(freq(fr5)[1,3]/(dim(fr5)[1]*dim(fr5)[2])*100,2),
+           round(freq(fr5)[2,3]/(dim(fr5)[1]*dim(fr5)[2])*100,2))
 # Creating the data frame
-tab<-data.frame(cat,may2020,june2022)
+tab<-data.frame(legend,may2020,may2023)
 
 # Creating a pie chart turned out to be quite a challenge and required some research to finally get it done.
 # Ultimately it's a bar plot, but the bars are put on top of each other, there's no x or y axis and the length of the bars is transformed to polar coordinates
 
 # Creating a pie chart for May 2020
 pie2020<-ggplot(tab, aes(x="",y=may2020,fill=legend)) +                   # x="" makes it so the bars are on top of each other, I need to do this to turn the barplot into a pie
-  geom_bar(stat="identity",width=1) +                                     # setting tupe of graph to a barplot
+  geom_bar(stat="identity",width=1) +                                     # setting type of graph to a bar plot
   coord_polar(theta="y") +                                                # Transform the value of the bars into polar coordinates
   theme_void() +                                                          # Deletes the axes
   geom_text(aes(label=paste(may2020, "%")),                               # Putting the percentage inside the corresponding slice
@@ -380,19 +379,19 @@ pie2020<-ggplot(tab, aes(x="",y=may2020,fill=legend)) +                   # x=""
 
 plot(pie2020)
 
-# Creating a pie chart for june 2022
-pie2022<-ggplot(tab, aes(x="",y=june2022,fill=legend)) +                   
+# Creating a pie chart for May 2023
+pie2023<-ggplot(tab, aes(x="",y=may2023,fill=legend)) +                   
   geom_bar(stat="identity",width=1) +                                     
   coord_polar(theta="y") +                                                
   theme_void() +                                                          
-  geom_text(aes(label=paste(june2022, "%")),                               
+  geom_text(aes(label=paste(may2023, "%")),                               
             position=position_stack(vjust=0.5)) +                         
   scale_fill_manual(values=c("Healthy"="blue", "Burned"="orange")) +      
   ggtitle("Pie chart for the burned area in June 2022")                    
 
-plot(pie2022)
+plot(pie2023)
 #plotting the two pie charts together 
-plot(pie2020+pie2022)
+plot(pie2020+pie2023)
 
 dev.off() # That's all folks!
 
