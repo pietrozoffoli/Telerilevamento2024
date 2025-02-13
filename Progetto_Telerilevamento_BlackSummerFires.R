@@ -333,6 +333,12 @@ burnt5<-rast("burnt5.tiff")
 perc5<-bper(fr5)
 perc5
 
+# calculating the percentage of true pixels before the fire, this way I can see how close to pre-event conditions the recovery is getting
+frpre<-prenbr<lim
+writeRaster(frpre,"frpre.tiff",overwrite=TRUE)
+percpre<-bper(frpre)
+percpre
+#[1] 1.94
 #----------------------------------------------------PHASE 4: SUMMARY--------------------------------------------------------------------------------------------------------------------#
 # Here I will summarize the data elaborated so far with plots and tables to highlight the most crucial aspects of this analysis.
 
