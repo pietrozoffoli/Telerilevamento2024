@@ -395,7 +395,7 @@ pie2021<-ggplot(tab, aes(x="",y=sep2021,fill=legend)) +
   geom_text(aes(label=paste(sep2021, "%")),                               
             position=position_stack(vjust=0.5)) +                         
   scale_fill_manual(values=c("Healthy"="blue", "Burned"="orange")) +      
-  ggtitle("Pie chart for the burned area in June 2022")                    
+  ggtitle("Pie chart for the burned area in September 2021")                    
 
 plot(pie2021)
 
