@@ -21,7 +21,8 @@ library(raster)                            # Geographic data analysis.
 library(patchwork)                         # Composing plots created with ggplot2 into a single visualization.
 library(viridis)                           # Producing colorblind-friendly color maps.
 
-# Then I'm setting the working directory to the directory. This is the place where RStudio can find the materials I need for the project and where exported files and productions will be saved into
+# Then I'm setting the working directory to the directory. 
+#This is the place where RStudio can find the materials I need for the project and where exported files and productions will be saved into
                                            # Starting the project by setting and calling the working directory containing all the data that are going to be used from here on
 setwd("C:/Users/HP/Documents/EsameDuccio") # this function sets the path R has to take to access the data
 getwd()                                    # this function prints the name of the working directory I'm in. I do this to make sure that everything is at it should be
@@ -86,7 +87,8 @@ stackpost<-c(pb2,pb3,pb4,pb8)
 # Plotting the stack using a colorblind-friendly color palette
 plot(stackpre,col=viridis(100))          
 plot(stackpost,col=viridis(100))
-# Making my own false color images. The function "im.plotRGB()" allows me to chenge the bands used in an image, this lets me create false color images to highlight the burned areas
+# Making my own false color images. The function "im.plotRGB()" allows me to chenge the bands used in an image,
+# this lets me create false color images to highlight the burned areas
 im.plotRGB(stackpre, 4, 2, 1)            
 im.plotRGB(stackpost, 4, 2, 1)          
 
@@ -102,7 +104,7 @@ dev.off()  # Again, give this old boy a break
 # 2) Normalized Burn Ratio (NBR) = (nir-swir)/(nir+swir)
 
 
-#--------------------------------------------------BAI & NIR FUNCTIONS-------------------------------
+#--------------------------------------------------BAI & NIR FUNCTIONS--------------------------------------------------------------------------------------------------------
 
 # I am writing two functions to calculate the BAI and NIR and resample the two raster if they have have different resolution
 # Higher values represent burnt areas
@@ -122,7 +124,7 @@ calcbai<-function(red,nir) {                                                    
   else{
     print("No need to resample here, you are good to go!")                        # if no resampling is needed the user will be notified
   }
-  bai<-((red-0.1)^2+(nir-0.06^2))/(red+nir)^2                                     # calculating the BAI after resampling if needed
+  bai<-((red-0.1)^2+(nir-0.06)^2)/(red+nir)^2                                     # calculating the BAI after resampling if needed
   return(bai)                                                                     # returning the result to the object it is being assigned to
 }
 
@@ -171,7 +173,6 @@ im.plotRGB(stackpost,4,2,1)
 plot(postnbr)
 
 dev.off()
-
 # Now this is more like it, shadows no longer represent an issue for our investigation
 # Let's divide the plot in classes so that we can start quantifying
 # From the NBR plot I see that the burned pixels have a value approximately below 0.3
@@ -190,7 +191,8 @@ class_num                      # printing said numbers (1=TRUE=Burned, 0=FALSE=H
 # layer value   count
 # 1     1     0 1645929
 # 2     1     1  871571
-# This means that there are 871571 cells representing the burned area. Now, knowing that Sentinel-2 has a resolution of 10 meters per pixel I can easily calculate the total area
+# This means that there are 871571 cells representing the burned area. Now, knowing that Sentinel-2 has a resolution of 10 meters per pixel
+# I can easily calculate the total area
 km2<-(871571*100)/10^6      # calculating the area in km^2
 km2                         # printing the value
 #[1] 87.1571
@@ -198,7 +200,7 @@ km2                         # printing the value
 perc_burnt<-(871571/2517500)*100 # calculating the percentage of burned surface
 perc_burnt                       # printing the value
 #[1] 34.6205
-dev.off()
+dev.off() 
 #--------------------------------------------------------------------------dNBR---------------------------------------------
 # Now to better comprehend the scope of the damage caused by the fire, I am going to calculate the differential Normalized Burn Ratio
 # Higher values represent damaged areas and lower values represent recovering vegetation
@@ -285,7 +287,7 @@ dev.off() #Thank you! It couldn't take it any longer
 # Now let's make numbers clarify what the eye can't fathom
 # Just like earlier we are going to divide the raster in two classes (burned=TRUE, healthy=FALSE). To do this we have to decide on a standard threshold to use for all the images
 
-lim<-0.3 # setting my threshold to 0.3 
+lim<-0.4 # setting my threshold to 0.3 
 
 # dividing each raster into two classes and calculating the frequency of each class and the percentage of the burned pixels
 # Now I'm writing a function to calculate the percentage of pixels that are true in a raster
@@ -297,37 +299,37 @@ bper<-function(x){                                                   # "x" is th
 }
 
               # 09-05-2020
-fr0<-nbr0<lim                                      # dividing my NBR map in true and false cells
+fr0<-dnbr0>lim                                      # dividing my NBR map in true and false cells
 writeRaster(fr0,"burnt0.tiff",overwrite=TRUE)      # creating the classified raster
 burnt0<-rast("burnt0.tiff")                        # importing the classified raster
 perc0<-bper(fr0)                                   # calculating the percentage of true/burned cells
 perc0                                              # printig said percentage
               # 20-09-2020
-fr1<-nbr1<lim
+fr1<-dnbr1>lim
 writeRaster(fr1,"burnt1.tiff",overwrite=TRUE)
 burnt1<-rast("burnt1.tiff")
 perc1<-bper(fr1)
 perc1
               # 14-05-2021
-fr2<-nbr2<lim
+fr2<-dnbr2>lim
 writeRaster(fr2,"burnt2.tiff",overwrite=TRUE)
 burnt2<-rast("burnt2.tiff")
 perc2<-bper(fr2)
 perc2
               # 11-09-2021
-fr3<-nbr3<lim
+fr3<-dnbr3>lim
 writeRaster(fr3,"burnt3.tiff",overwrite=TRUE)
 burnt3<-rast("burnt3.tiff")
 perc3<-bper(fr3)
 perc3
               # 18-06-2022
-fr4<-nbr4<lim
+fr4<-dnbr4>lim
 writeRaster(fr4,"burnt4.tiff",overwrite=TRUE)
 burnt4<-rast("burnt4.tiff")
 perc4<-bper(fr4)
 perc4
               # 04-05-2023
-fr5<-nbr5<lim
+fr5<-dnbr5>lim
 writeRaster(fr5,"burnt5.tiff",overwrite=TRUE)
 burnt5<-rast("burnt5.tiff")
 perc5<-bper(fr5)
@@ -344,12 +346,12 @@ percpre
 
 # Creating a composite graph with the dNBR plots, date, and estimated percentage of burned area/exposed soil
 confnbr<-par(mfrow=c(3,2))
-plot(nbr0,col=viridis(100),main=paste("09-05-2020 burned area:",perc0,"%"))     # I'm using the function "paste" to put an object (ex. perc0) inside a line of text
-plot(nbr1,col=viridis(100),main=paste("20-09-2020 burned area:",perc1,"%"))
-plot(nbr2,col=viridis(100),main=paste("14-05-2021 burned area:",perc2,"%"))
-plot(nbr3,col=viridis(100),main=paste("11-09-2021 burned area:",perc3,"%"))
-plot(nbr4,col=viridis(100),main=paste("18-06-2022 burned area:",perc4,"%"))
-plot(nbr5,col=viridis(100),main=paste("04-05-2023 burned area:",perc5,"%"))
+plot(dnbr0,col=viridis(100),main=paste("09-05-2020 burned area:",perc0,"%"))     # I'm using the function "paste" to put an object (ex. perc0) inside a line of text
+plot(dnbr1,col=viridis(100),main=paste("20-09-2020 burned area:",perc1,"%"))
+plot(dnbr2,col=viridis(100),main=paste("14-05-2021 burned area:",perc2,"%"))
+plot(dnbr3,col=viridis(100),main=paste("11-09-2021 burned area:",perc3,"%"))
+plot(dnbr4,col=viridis(100),main=paste("18-06-2022 burned area:",perc4,"%"))
+plot(dnbr5,col=viridis(100),main=paste("04-05-2023 burned area:",perc5,"%"))
 
 # Creating pie charts to better visualize the percentage of burned area
 # First I need to create a data frame with the percentage of healthy and burned soil for each time step
@@ -358,20 +360,23 @@ legend<-c("Healthy","Burned")
 # Create vector containing the percentage of each quality for May 2020
 may2020<-c(round(freq(fr0)[1,3]/(dim(fr0)[1]*dim(fr0)[2])*100,2),
           round(freq(fr0)[2,3]/(dim(fr0)[1]*dim(fr0)[2])*100,2))
+# Create vector containing the percentage of each quality for September 2021
+sep2021<-c(round(freq(fr3)[1,3]/(dim(fr3)[1]*dim(fr3)[2])*100,2),
+           round(freq(fr3)[2,3]/(dim(fr3)[1]*dim(fr3)[2])*100,2))
 # Create vector containing the percentage of each quality for May 2023
 may2023<-c(round(freq(fr5)[1,3]/(dim(fr5)[1]*dim(fr5)[2])*100,2),
            round(freq(fr5)[2,3]/(dim(fr5)[1]*dim(fr5)[2])*100,2))
 # Creating the data frame
-tab<-data.frame(legend,may2020,may2023)
+tab<-data.frame(legend,may2020,sep2021,may2023)
 tab
 # legend may2020 may2023
-# 1 Healthy   65.38   96.84
-# 2  Burned   34.62    3.16
+# 1 Healthy   71.24   99.96
+# 2  Burned   28.76    0.04
 # Creating a pie chart turned out to be quite a challenge and required some research to finally get it done.
 # Ultimately it's a bar plot, but the bars are put on top of each other, there's no x or y axis and the length of the bars is transformed to polar coordinates
 
 # Creating a pie chart for May 2020
-pie2020<-ggplot(tab, aes(x="",y=may2020,fill=legend)) +                   # x="" makes it so the bars are on top of each other, I need to do this to turn the barplot into a pie
+pie2020<-ggplot(tab, aes(x="",y=may2020,fill=legend)) +                   # x="" makes it so the bars are on top of each other, I need to do this to turn the bar plot into a pie
   geom_bar(stat="identity",width=1) +                                     # setting type of graph to a bar plot
   coord_polar(theta="y") +                                                # Transform the value of the bars into polar coordinates
   theme_void() +                                                          # Deletes the axes
@@ -381,6 +386,18 @@ pie2020<-ggplot(tab, aes(x="",y=may2020,fill=legend)) +                   # x=""
   ggtitle("Pie chart for the burned area in May 2020")                    # Title of the chart
 
 plot(pie2020)
+
+# Creating a pie chart for May 2023
+pie2021<-ggplot(tab, aes(x="",y=sep2021,fill=legend)) +                   
+  geom_bar(stat="identity",width=1) +                                     
+  coord_polar(theta="y") +                                                
+  theme_void() +                                                          
+  geom_text(aes(label=paste(sep2021, "%")),                               
+            position=position_stack(vjust=0.5)) +                         
+  scale_fill_manual(values=c("Healthy"="blue", "Burned"="orange")) +      
+  ggtitle("Pie chart for the burned area in June 2022")                    
+
+plot(pie2021)
 
 # Creating a pie chart for May 2023
 pie2023<-ggplot(tab, aes(x="",y=may2023,fill=legend)) +                   
@@ -393,10 +410,13 @@ pie2023<-ggplot(tab, aes(x="",y=may2023,fill=legend)) +
   ggtitle("Pie chart for the burned area in June 2022")                    
 
 plot(pie2023)
-#plotting the two pie charts together 
-plot(pie2020+pie2023)
+#plotting the three pie charts together 
+plot(pie2020+pie2021+pie2023)
 
 dev.off() # That's all folks!
 
 #???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+
+
+
 
