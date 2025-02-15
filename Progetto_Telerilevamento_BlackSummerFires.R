@@ -17,7 +17,6 @@
 library(terra)                             # Spatial data analysis.
 library(ggplot2)                           # Creating statistical data visualization.
 library(imageRy)                           # Images management, sharing and editing.
-library(raster)                            # Geographic data analysis.
 library(patchwork)                         # Composing plots created with ggplot2 into a single visualization.
 library(viridis)                           # Producing colorblind-friendly color maps.
 
